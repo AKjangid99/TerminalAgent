@@ -42,36 +42,26 @@ export const MODELS: ModelInfo[] = [
 		contextWindow: 1_048_576,
 		maxOutputTokens: 8192,
 	},
-	// Groq
+	// Groq. The llama-3.x and kimi ids Groq hosted through 2025 have been retired;
+	// these are what /v1/models actually serves.
 	{
-		id: "llama-3.3-70b-versatile",
-		name: "Llama 3.3 70B",
-		provider: "groq",
-		contextWindow: 128_000,
-		maxOutputTokens: 32768,
-	},
-	{
-		id: "llama-3.1-8b-instant",
-		name: "Llama 3.1 8B Instant",
-		provider: "groq",
-		contextWindow: 128_000,
-		maxOutputTokens: 8192,
-	},
-	{
-		id: "deepseek-r1-distill-llama-70b",
-		name: "DeepSeek R1 Distill 70B",
-		provider: "groq",
-		contextWindow: 128_000,
-		maxOutputTokens: 16384,
-	},
-	{ id: "qwen-qwq-32b", name: "Qwen QwQ 32B", provider: "groq", contextWindow: 128_000, maxOutputTokens: 16384 },
-	{
-		id: "moonshotai/kimi-k2-instruct",
-		name: "Kimi K2 Instruct",
+		id: "openai/gpt-oss-120b",
+		name: "GPT-OSS 120B",
 		provider: "groq",
 		contextWindow: 131_072,
-		maxOutputTokens: 16384,
+		maxOutputTokens: 65536,
 	},
+	{
+		id: "openai/gpt-oss-20b",
+		name: "GPT-OSS 20B",
+		provider: "groq",
+		contextWindow: 131_072,
+		maxOutputTokens: 65536,
+	},
+	{ id: "qwen/qwen3.8-27b", name: "Qwen3.8 27B", provider: "groq", contextWindow: 131_042, maxOutputTokens: 16384 },
+	{ id: "qwen/qwen3.6-27b", name: "Qwen3.6 27B", provider: "groq", contextWindow: 131_072, maxOutputTokens: 16384 },
+	{ id: "groq/compound", name: "Compound", provider: "groq", contextWindow: 131_072, maxOutputTokens: 8192 },
+	{ id: "groq/compound-mini", name: "Compound Mini", provider: "groq", contextWindow: 131_072, maxOutputTokens: 8192 },
 ];
 
 export function createProvider(providerName: string, apiKey: string): Provider {
@@ -100,7 +90,7 @@ export function getProviderModels(providerName: string): ModelInfo[] {
 const DEFAULT_MODELS: Record<string, string> = {
 	anthropic: "claude-sonnet-5",
 	gemini: "gemini-2.5-flash",
-	groq: "llama-3.3-70b-versatile",
+	groq: "openai/gpt-oss-120b",
 };
 
 export function getDefaultModel(providerName: string): string {
