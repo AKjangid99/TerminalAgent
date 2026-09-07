@@ -7,7 +7,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Messages } from "../components/Inspector.jsx";
-import { Resizer, useInspectorWidth } from "../components/Resizer.jsx";
+import { HResizer, Resizer, useInspectorWidth, useTerminalHeight } from "../components/Resizer.jsx";
 import { buildTicks, foldTo } from "../data/stream.js";
 
 const SPEEDS = [
@@ -190,6 +190,7 @@ export default function StreamPage({ nav, answer, setAnswer }) {
 	const [speed, setSpeed] = useState(1);
 	const [tab, setTab] = useState("source");
 	const [width, setWidth] = useInspectorWidth();
+	const [termHeight, setTermHeight] = useTerminalHeight(210);
 
 	const ticks = useMemo(() => buildTicks(answer), [answer]);
 	const tick = ticks[Math.min(index, ticks.length - 1)];
@@ -354,7 +355,9 @@ export default function StreamPage({ nav, answer, setAnswer }) {
 						</span>
 					</div>
 
-					<div className="term-wrap stream-term">
+					<HResizer height={termHeight} setHeight={setTermHeight} fallback={210} />
+
+					<div className="term-wrap stream-term" style={{ height: termHeight }}>
 						<div className="pane-head">
 							<span>rendered from AgentEvents — what you actually see</span>
 						</div>

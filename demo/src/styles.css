@@ -121,7 +121,7 @@ button.primary { background: var(--accent); border-color: var(--accent); color: 
 .counter { color: var(--muted); font: 12px var(--mono); white-space: nowrap; }
 
 /* ---- terminal ---- */
-.term-wrap { flex: none; height: 300px; border-top: 1px solid var(--line); display: flex; flex-direction: column; background: #100c0a; }
+.term-wrap { flex: none; min-height: 0; overflow: hidden; border-top: 1px solid var(--line); display: flex; flex-direction: column; background: #100c0a; }
 .pane-head {
 	display: flex; align-items: center; gap: 10px;
 	padding: 6px 12px; border-bottom: 1px solid var(--line);
@@ -200,6 +200,22 @@ button.primary { background: var(--accent); border-color: var(--accent); color: 
 .gutter { background: var(--line); cursor: col-resize; transition: background 0.12s; }
 .gutter:hover, .gutter.dragging { background: var(--accent); }
 
+.gutter.horizontal {
+	flex: none; position: relative; height: 6px; width: 100%;
+	cursor: row-resize; display: flex; align-items: center; justify-content: center;
+}
+.gutter.horizontal .grip {
+	width: 34px; height: 2px; border-radius: 1px; background: #5a4c43;
+}
+.gutter.horizontal:hover .grip, .gutter.horizontal.dragging .grip { background: var(--bg); }
+.gutter.horizontal .collapse {
+	position: absolute; right: 10px; top: -9px;
+	height: 18px; width: 22px; padding: 0; line-height: 1;
+	border: 1px solid var(--line); border-radius: 4px;
+	background: var(--panel); color: var(--muted); font-size: 9px; cursor: pointer;
+}
+.gutter.horizontal .collapse:hover { color: var(--accent); border-color: var(--accent); }
+
 .nav button { padding: 5px 12px; }
 
 /* ---- streaming page ---- */
@@ -260,6 +276,5 @@ button.primary { background: var(--accent); border-color: var(--accent); color: 
 	white-space: pre-wrap; word-break: break-word;
 }
 
-.term-wrap.stream-term { height: 210px; }
 
 .cursor { color: var(--accent); animation: blink 0.9s steps(2) infinite; }

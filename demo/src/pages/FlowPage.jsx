@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Resizer, useInspectorWidth } from "../components/Resizer.jsx";
+import { HResizer, Resizer, useInspectorWidth, useTerminalHeight } from "../components/Resizer.jsx";
 import { Canvas } from "../components/Canvas.jsx";
 import { EventLog, Messages, Payloads, StepHead } from "../components/Inspector.jsx";
 import { Terminal } from "../components/Terminal.jsx";
@@ -30,6 +30,7 @@ export default function FlowPage({ nav }) {
 	const [speed, setSpeed] = useState(1);
 	const [tab, setTab] = useState("payload");
 	const [width, setWidth] = useInspectorWidth();
+	const [termHeight, setTermHeight] = useTerminalHeight(300);
 
 	const steps = useMemo(() => stepsFor(mode), [mode]);
 	const step = useMemo(() => viewStep(steps[index] ?? steps[0], mode, answer), [steps, index, mode, answer]);
@@ -181,7 +182,9 @@ export default function FlowPage({ nav }) {
 						<span className="counter">{step.phase}</span>
 					</div>
 
-					<div className="term-wrap">
+					<HResizer height={termHeight} setHeight={setTermHeight} fallback={300} />
+
+					<div className="term-wrap" style={{ height: termHeight }}>
 						<div className="pane-head">
 							<span>{mode === "print" ? "stdout — modes/print.ts" : "terminal — Ink TUI"}</span>
 						</div>
