@@ -93,7 +93,7 @@ USAGE
   cogent --print [message]  Print mode: stream output to stdout
 
 OPTIONS
-  --provider <name>     Provider: gemini (default), anthropic, or groq
+  --provider <name>     Provider: groq (default), anthropic, or gemini
   --model <id>          Model ID to use (see --list-models)
   --session <id>        Resume a previous session
   --context-limit <n>   Pretend the context window is n tokens (forces compaction)

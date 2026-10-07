@@ -46,7 +46,7 @@ export async function main(argv: string[]): Promise<void> {
 	}
 
 	const providerName =
-		args.provider ?? resumed?.provider ?? settings.provider ?? process.env.COGENT_PROVIDER ?? "gemini";
+		args.provider ?? resumed?.provider ?? settings.provider ?? process.env.COGENT_PROVIDER ?? "groq";
 	const model =
 		args.model ?? resumed?.model ?? settings.model ?? process.env.COGENT_MODEL ?? getDefaultModel(providerName);
 
@@ -96,7 +96,6 @@ export async function main(argv: string[]): Promise<void> {
 		session: resumed,
 	};
 
-	// The TUI needs a real terminal; --classic is the plain readline REPL.
 	if (args.classic || !process.stdout.isTTY) {
 		await runInteractiveMode(interactiveOptions);
 		return;
